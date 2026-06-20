@@ -402,12 +402,24 @@
             font-size: 1.5rem;
         }
 
-        .build-form {
+        .build-form-container {
             background: var(--dark);
             padding: 2.5rem;
             border-radius: 12px;
             border: 2px solid var(--primary);
             box-shadow: 0 10px 40px rgba(0, 255, 136, 0.1);
+            position: relative;
+        }
+
+        .build-success-message {
+            display: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #0a0e27;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 1rem;
         }
         
         /* About Section */
@@ -816,26 +828,33 @@
                     <li><i>🚀</i> Prototype to Product</li>
                 </ul>
             </div>
-            <div class="build-form">
-                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="build-form-container">
+                <!-- Build with ForgeX Google Form Integration -->
+                <form id="buildForm" action="https://docs.google.com/forms/d/e/YOUR_BUILD_FORM_ID/formResponse" method="POST" target="build_iframe">
                     <div class="form-group">
                         <label for="idea-name">Project/Idea Name</label>
-                        <input type="text" id="idea-name" name="project_name" required placeholder="What should we call it?">
+                        <input type="text" id="idea-name" name="entry.ID_FOR_NAME" required placeholder="What should we call it?">
                     </div>
                     <div class="form-group">
                         <label for="idea-desc">Describe Your Idea</label>
-                        <textarea id="idea-desc" name="description" required placeholder="Tell us what your idea does and who it helps..."></textarea>
+                        <textarea id="idea-desc" name="entry.ID_FOR_DESC" required placeholder="Tell us what your idea does and who it helps..."></textarea>
                     </div>
                     <div class="form-group">
                         <label for="idea-details">Existing Designs/Code (Optional)</label>
-                        <textarea id="idea-details" name="existing_details" placeholder="Paste any circuit designs, code snippets, or links here..."></textarea>
+                        <textarea id="idea-details" name="entry.ID_FOR_DETAILS" placeholder="Paste any circuit designs, code snippets, or links here..."></textarea>
                     </div>
                     <div class="form-group">
                         <label for="contact-info">Your Contact (Email/Phone)</label>
-                        <input type="text" id="contact-info" name="contact" required placeholder="How can we reach you?">
+                        <input type="text" id="contact-info" name="entry.ID_FOR_CONTACT" required placeholder="How can we reach you?">
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Submit My Idea</button>
                 </form>
+                
+                <iframe name="build_iframe" id="build_iframe" style="display:none;"></iframe>
+                
+                <div id="buildSuccessMessage" class="build-success-message">
+                    🚀 Genius Idea Received! The ForgeX team will review it and contact you soon.
+                </div>
             </div>
         </div>
     </section>
@@ -993,6 +1012,22 @@
             themeToggle.innerHTML = '☀️';
             themeToggle.title = 'Switch to Dark Mode';
         }
+
+        // =================================================================
+        // BUILD FORM SUBMISSION
+        // =================================================================
+        document.getElementById('buildForm').addEventListener('submit', function(e) {
+            setTimeout(function() {
+                document.getElementById('buildSuccessMessage').style.display = 'block';
+                document.getElementById('buildForm').style.display = 'none';
+                
+                setTimeout(function() {
+                    document.getElementById('buildSuccessMessage').style.display = 'none';
+                    document.getElementById('buildForm').style.display = 'block';
+                    document.getElementById('buildForm').reset();
+                }, 5000);
+            }, 500);
+        });
 
         // =================================================================
         // ORDER MODAL FUNCTIONS
