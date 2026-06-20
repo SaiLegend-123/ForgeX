@@ -233,7 +233,7 @@
         
         .btn-primary {
             background: var(--primary);
-            color: #0a0e27; /* Keep button text dark for visibility on green */
+            color: #0a0e27;
             box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
         }
         
@@ -352,6 +352,62 @@
             position: absolute;
             left: 0;
             color: var(--primary);
+        }
+
+        /* Build with ForgeX Section */
+        .build-section {
+            background: var(--dark-light);
+            padding: 6rem 5%;
+            border-top: 2px solid var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .build-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .build-info h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .build-info p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        .build-features {
+            list-style: none;
+        }
+
+        .build-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .build-features i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .build-form {
+            background: var(--dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.1);
         }
         
         /* About Section */
@@ -522,6 +578,11 @@
             .products-grid {
                 grid-template-columns: 1fr;
             }
+
+            .build-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
             
             .cta-buttons {
                 flex-direction: column;
@@ -645,6 +706,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
+                <li><a href="#build">Build with ForgeX</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -661,8 +723,8 @@
             <p class="tagline">Innovative Arduino-based solutions designed by young entrepreneurs to solve real-world problems. From smart irrigation to air quality monitoring, we're building the future of automation.</p>
             <div class="cta-buttons">
                 <a href="#products" class="btn btn-primary">Explore Our Products</a>
+                <a href="#build" class="btn btn-secondary">Build My Idea</a>
                 <a href="#about" class="btn btn-secondary">About Us</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
     </section>
@@ -741,11 +803,47 @@
             </div>
         </div>
     </section>
+
+    <section id="build" class="build-section">
+        <div class="build-container">
+            <div class="build-info">
+                <h2>Build with ForgeX</h2>
+                <p>Have a genius idea but no experience in robotics or coding? We've got you covered. Submit your concept, and the ForgeX team will bring it to life.</p>
+                <ul class="build-features">
+                    <li><i>🛠️</i> Custom Circuit Design</li>
+                    <li><i>💻</i> Expert Coding & Logic</li>
+                    <li><i>📐</i> 3D & Structural Designs</li>
+                    <li><i>🚀</i> Prototype to Product</li>
+                </ul>
+            </div>
+            <div class="build-form">
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="idea-name">Project/Idea Name</label>
+                        <input type="text" id="idea-name" name="project_name" required placeholder="What should we call it?">
+                    </div>
+                    <div class="form-group">
+                        <label for="idea-desc">Describe Your Idea</label>
+                        <textarea id="idea-desc" name="description" required placeholder="Tell us what your idea does and who it helps..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="idea-details">Existing Designs/Code (Optional)</label>
+                        <textarea id="idea-details" name="existing_details" placeholder="Paste any circuit designs, code snippets, or links here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-info">Your Contact (Email/Phone)</label>
+                        <input type="text" id="contact-info" name="contact" required placeholder="How can we reach you?">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit My Idea</button>
+                </form>
+            </div>
+        </div>
+    </section>
     
     <section id="about" class="section">
         <h2 class="section-title">About ForgeX</h2>
         <div class="about-content">
-            <p>We're a team of passionate young entrepreneurs who believe technology should solve real problems. Using Arduino, ESP32, and our coding skills, we design and build practical robotics solutions that make life easier, safer, and more efficient. Every product we create is tested, refined, and built with care.</p>
+            <p>We're a team of passionate seventh-grade entrepreneurs who believe technology should solve real problems. Using Arduino, ESP32, and our coding skills, we design and build practical robotics solutions that make life easier, safer, and more efficient. Every product we create is tested, refined, and built with care.</p>
             
             <div class="team-section">
                 <div class="team-member">
