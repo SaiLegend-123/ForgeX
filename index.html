@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Robotics - Smart Solutions by Young Innovators</title>
+    <title>ForgeX - Smart Solutions by Young Innovators</title>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
@@ -17,6 +17,24 @@
             --text: #ffffff;
             --text-dim: #a0a8c0;
             --accent: #ff3366;
+            --bg-grid-color: rgba(0, 255, 136, 0.03);
+            --nav-bg: rgba(10, 14, 39, 0.95);
+            --modal-overlay: rgba(0, 0, 0, 0.8);
+            --input-bg: #0a0e27;
+            --input-border: rgba(0, 255, 136, 0.3);
+        }
+
+        /* Light Mode Overrides */
+        [data-theme="light"] {
+            --dark: #ffffff;
+            --dark-light: #f4f7f6;
+            --text: #1a1f3a;
+            --text-dim: #4a5568;
+            --bg-grid-color: rgba(0, 255, 136, 0.1);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --modal-overlay: rgba(0, 0, 0, 0.5);
+            --input-bg: #ffffff;
+            --input-border: rgba(0, 255, 136, 0.5);
         }
         
         * {
@@ -31,6 +49,7 @@
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
         }
         
         /* Animated background grid */
@@ -41,8 +60,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+                linear-gradient(var(--bg-grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--bg-grid-color) 1px, transparent 1px);
             background-size: 50px 50px;
             z-index: -1;
             animation: gridScroll 20s linear infinite;
@@ -58,7 +77,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 14, 39, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             padding: 1rem 5%;
             display: flex;
@@ -67,6 +86,7 @@
             z-index: 1000;
             border-bottom: 2px solid var(--primary);
             box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+            transition: background 0.3s;
         }
         
         .logo {
@@ -80,6 +100,12 @@
             letter-spacing: 2px;
         }
         
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -111,6 +137,28 @@
         
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--dark-light);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
         }
         
         /* Hero Section */
@@ -185,7 +233,7 @@
         
         .btn-primary {
             background: var(--primary);
-            color: var(--dark);
+            color: #0a0e27; /* Keep button text dark for visibility on green */
             box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
         }
         
@@ -203,7 +251,7 @@
         
         .btn-secondary:hover {
             background: var(--primary);
-            color: var(--dark);
+            color: #0a0e27;
         }
         
         /* Products Section */
@@ -375,7 +423,7 @@
         
         .skill-tag:hover {
             background: var(--primary);
-            color: var(--dark);
+            color: #0a0e27;
             transform: scale(1.05);
         }
         
@@ -401,11 +449,12 @@
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 1rem;
-            background: var(--dark);
-            border: 2px solid rgba(0, 255, 136, 0.3);
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
             border-radius: 8px;
             color: var(--text);
             font-family: 'Inter', sans-serif;
@@ -413,7 +462,8 @@
         }
         
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
@@ -491,19 +541,19 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: var(--modal-overlay);
             backdrop-filter: blur(5px);
         }
         
         .modal-content {
             background: var(--dark-light);
             margin: 5% auto;
-            padding: 2.5rem;
             border: 2px solid var(--primary);
             border-radius: 12px;
             width: 90%;
             max-width: 600px;
             max-height: 85vh;
+            padding: 2rem;
             overflow-y: auto;
             animation: slideDown 0.3s ease-out;
         }
@@ -577,7 +627,7 @@
         .success-message {
             display: none;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
+            color: #0a0e27;
             padding: 1.5rem;
             border-radius: 8px;
             text-align: center;
@@ -590,13 +640,18 @@
     <div class="bg-grid"></div>
     
     <nav>
-        <div class="logo">UNIVERSAL ROBOTICS</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="logo">FORGEX</div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" title="Switch to Light Mode">
+                🌙
+            </button>
+        </div>
     </nav>
     
     <section id="home" class="hero">
@@ -688,20 +743,15 @@
     </section>
     
     <section id="about" class="section">
-        <h2 class="section-title">About Universal Robotics</h2>
+        <h2 class="section-title">About ForgeX</h2>
         <div class="about-content">
-            <p>We're a team of passionate seventh-grade entrepreneurs who believe technology should solve real problems. Using Arduino, ESP32, and our coding skills, we design and build practical robotics solutions that make life easier, safer, and more efficient. Every product we create is tested, refined, and built with care.</p>
+            <p>We're a team of passionate young entrepreneurs who believe technology should solve real problems. Using Arduino, ESP32, and our coding skills, we design and build practical robotics solutions that make life easier, safer, and more efficient. Every product we create is tested, refined, and built with care.</p>
             
             <div class="team-section">
                 <div class="team-member">
                     <h3>Saiswagath</h3>
                     <p class="role">Founder & CEO</p>
                     <p>Leading product development and company vision</p>
-                </div>
-                <div class="team-member">
-                    <h3>TLS Mithul</h3>
-                    <p class="role">Co-Founder & Chief Technical Director</p>
-                    <p>Leading technical development with energy and expertise</p>
                 </div>
             </div>
             
@@ -738,9 +788,6 @@
                 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
             </form>
-            <p style="color: var(--text-dim); margin-top: 2rem; font-size: 0.9rem; text-align: center;">
-                📧 To activate the contact form: Sign up at <a href="https://formspree.io" target="_blank" style="color: var(--primary); text-decoration: underline;">formspree.io</a>, get your form ID, and replace "YOUR_FORM_ID" in the code.
-            </p>
         </div>
     </section>
     
@@ -758,7 +805,7 @@
             <form id="orderForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdoIEoF7pobGxFigb1hKKo0BPueBnDAb-9w-KtnDWi9bfKqZg/formResponse" method="POST" target="hidden_iframe">
                 <div class="form-group">
                     <label for="productField">Which Product Are You Ordering? *</label>
-                    <select id="productField" name="entry.638810718" required style="width: 100%; padding: 1rem; background: var(--dark); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif;">
+                    <select id="productField" name="entry.638810718" required>
                         <option value="">-- Select a Product --</option>
                         <option value="Smart Watering System">Smart Watering System</option>
                         <option value="Air Quality Detection System">Air Quality Detection System</option>
@@ -816,11 +863,39 @@
     </div>
     
     <footer>
-        <p>&copy; 2026 Universal Robotics. Building the future, one project at a time.</p>
+        <p>&copy; 2026 ForgeX. Building the future, one project at a time.</p>
         <p>Designed with passion by young innovators</p>
     </footer>
     
     <script>
+        // =================================================================
+        // THEME TOGGLE FUNCTION
+        // =================================================================
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '🌙';
+                themeToggle.title = 'Switch to Light Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '☀️';
+                themeToggle.title = 'Switch to Dark Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.setAttribute('data-theme', 'light');
+            themeToggle.innerHTML = '☀️';
+            themeToggle.title = 'Switch to Dark Mode';
+        }
+
         // =================================================================
         // ORDER MODAL FUNCTIONS
         // =================================================================
@@ -829,7 +904,6 @@
         function openOrderModal(productName) {
             selectedProductName = productName;
             document.getElementById('selectedProduct').textContent = productName;
-            // Pre-select the product in the dropdown
             document.getElementById('productField').value = productName;
             document.getElementById('orderModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
@@ -842,7 +916,6 @@
             document.body.style.overflow = 'auto';
         }
         
-        // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('orderModal');
             if (event.target == modal) {
@@ -854,12 +927,10 @@
         // ORDER FORM SUBMISSION
         // =================================================================
         document.getElementById('orderForm').addEventListener('submit', function(e) {
-            // Show success message
             setTimeout(function() {
                 document.getElementById('successMessage').style.display = 'block';
                 document.getElementById('orderForm').style.display = 'none';
                 
-                // Close modal after 3 seconds
                 setTimeout(function() {
                     closeOrderModal();
                     document.getElementById('orderForm').style.display = 'block';
